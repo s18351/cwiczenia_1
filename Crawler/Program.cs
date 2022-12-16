@@ -2,9 +2,19 @@
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            string websiteUrl = args[0];
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.GetAsync(websiteUrl);
+
+
+
+            Console.WriteLine(response);
+
+
         }
+
+
     }
 }
