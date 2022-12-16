@@ -7,14 +7,12 @@ namespace Crawler
     {
         static async Task Main(string[] args)
         {
-            
-
             HttpClient client = new HttpClient();
 
             try
             {
                 if (args.Length == 0) throw new ArgumentNullException();
-                if (!Uri.IsWellFormedUriString(args[0], UriKind.Absolute)) throw new ArgumentException("NIEPRAWIDŁOWY ADRES STRONY");
+                if (!Uri.IsWellFormedUriString(args[0], UriKind.Absolute)) throw new ArgumentException();
                 string websiteUrl = args[0];
                 HttpResponseMessage response = await client.GetAsync(websiteUrl);
 
@@ -36,9 +34,9 @@ namespace Crawler
                     }
                 }
             }
-            catch (Exception e) 
+            catch (Exception e)
             {
-               switch(e)
+                switch (e)
                 {
                     case ArgumentNullException:
                         Console.WriteLine("BRAK ADRESU STRONY");
@@ -46,26 +44,18 @@ namespace Crawler
                     case ArgumentException:
                         Console.WriteLine("NIEPRAWIDŁOWY ADRES STRONY");
                         break;
-                    default: 
+                    default:
                         Console.WriteLine("Błąd w czasie pobierania strony");
                         break;
                 }
             }
-            finally 
-            { 
-                client.Dispose(); 
+            finally
+            {
+                client.Dispose();
             }
-
-
-            
-
-            }
-
-            //Console.WriteLine(args[0]);
-
 
         }
 
+    }
 
-    
 }
